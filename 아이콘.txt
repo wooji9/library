@@ -1,0 +1,7 @@
+비밀번호 : fas fa-key   <i class="fa-key fa-fw fas"></i>
+아이디 : fas fa-id-badge  <i class="fas fa-user rgtspace-5"></i>
+
+잠금 : fas fa-lock   <i class="fa-lock fa-fw fas"></i>
+
+여자 : fas fa-female    <i class="fa-female fa-fw fas"></i>
+남자 : fas fa-male   <i class="fa-male fa-fw fas"></i>

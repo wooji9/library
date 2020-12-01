@@ -1,0 +1,73 @@
+--sequence
+create sequence seq_gongji_idx;
+
+create table gongji(
+	idx NUMBER(3) primary key,
+	title VARCHAR2(255) not null,
+	name VARCHAR2(50) not null,
+	content CLOB, --게시글 내용
+	readhit NUMBER(4) default 0,
+	regdate DATE,
+	del_info NUMBER(3)
+);
+
+--샘플 데이터
+insert into gongji values(
+	'0',
+	'테스트 제목',
+	'테스트',
+	'테스트 내용',
+	'0',
+	sysdate,
+	'0'
+);
+commit;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--sequence
+create sequence seq_notice_idx;
+
+create table notice(
+	idx NUMBER(3) primary key,
+	name VARCHAR2(255) not null,
+	content CLOB,
+	pwd VARCHAR2(100) not null,
+	ip VARCHAR2(50),
+	regdate DATE	
+);

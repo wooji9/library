@@ -1,0 +1,16 @@
+create sequence hope_idx;
+
+create table hope(
+	idx number(6), --순번
+	subject varchar2(100) not null, --제목
+	author varchar2(100) not null, --저자
+	company varchar2(100) not null, --출판사
+	book_year varchar2(100) not null, --출판년도
+	isbn varchar2(100) not null, --isbn
+	regdate date, --신청일
+	ref number(30),
+	result number(2) not null
+);
+
+처리결과
+유저아이디(user_id)

@@ -1,0 +1,38 @@
+create sequence lib_board_idx;
+
+create table lib_board(
+	idx number(3) primary key,
+	subject varchar2(255) not null, --제목
+	name varchar2(50) not null, --유저이름
+	content CLOB, --내용
+	regdate dATE, --저장 날짜
+	readhit NUMBER(4) default 0, --조회수
+	ref NUMBER(30), --메인글
+	step NUMBER(20), --댓글
+	del_info number(1), --삭제유무
+	mem_id varchar2(100) not null, --회원 아이디
+	ip varchar2(100) --아이피
+); 
+
+--샘플 데이터
+insert into lib_board values(
+	'0',
+	'테스트 제목',
+	'테스트',
+	'테스트 내용',
+	sysdate,
+	'0',
+	'0',
+	'0',
+	'0',
+	'test',
+	'192.01.01.01'
+);
+commit;
+
+--댓글(사용할지 안할지 모름)
+create sequence lib_board_ref_idx;
+
+
+
+

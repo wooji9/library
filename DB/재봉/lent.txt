@@ -1,0 +1,13 @@
+create sequence lent_idx;
+
+create table lent(
+	idx number(5) primary key,--일련번호
+	m_id varchar2(50) not null,--회원ID
+	b_isbl varchar2(50) not null,--책ID
+	lent varchar2(50) not null,--예약대여여부
+	lentdate date not null, --대여일
+	redate date,
+	b_name varchar2(50) not null 
+);
+
+lent = reserve : 예약, lent : 대여, rt : 반납,  ca_rt:예약취소 승인요청    cancel : 예약 취소

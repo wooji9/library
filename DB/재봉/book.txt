@@ -1,0 +1,32 @@
+책 정보 테이블
+
+--시퀀스
+create sequence book_idx;
+
+create table off_book(
+	idx NUMBER(6) primary key, -- 일련번호
+	book_name varchar2(100) not null, --책이름
+	category varchar2(100) not null, --카테고리
+	company varchar2(100) not null, --출판사
+	content varchar2(500) not null, --줄거리
+	author varchar2(100) not null, -- 저자
+	book_year varchar2(100) NOT NULL, --출판년도
+	isbl varchar2(100) not null, --책고유번호
+	receiving date, --도서관 소장일자
+	hits NUMBER(7), --조회수
+	rent number(2), --대여 유무
+	reserve number(2), --예약 유무
+	rec number(2) --추천도서
+);
+
+insert into off_book values( book_idx.nextVal, '버드캐칭', '소설', '광화문글방', '김범정 장편소설 버드캐칭 출간', '김범정', '2020-11-16', '9788974331344', sysdate, 0, 0, 0, 0);
+insert into off_book values( book_idx.nextVal, '법의 이름으로', '소설', '책사랑', '법의 색깔에 관한 이야기이다', '김성돈', '2020-11-10', '9791130306865', sysdate, 0, 0, 0, 0);
+insert into off_book values( book_idx.nextVal, '들어본이야기', '소설', '책사랑', '지금까지 들어본적없는 세계', '구병모', '2020-11-06', '9791190758161', sysdate, 0, 0, 0, 0);
+insert into off_book values( book_idx.nextVal, '숨', '소설', '광화문글방', '한유주의 신작 소설집!!!', '한유주', '2020-11-05', '9791197085420', sysdate, 0, 0, 0, 0);
+insert into off_book values( book_idx.nextVal, '가을의감옥', '소설', '책사랑', '놀라운 발상의 전환!!', '이규원', '2020-11-04', '9791165297886', sysdate, 0, 0, 0, 0);
+insert into off_book values( book_idx.nextVal, '언니믿지', '소설', '폴앤니나', '여성연대를 이야기하는 단편소설', '송순진', '2020-11-01', '9791196798772', sysdate, 0, 0, 0, 0);
+insert into off_book values( book_idx.nextVal, '시체찾는아이들', '소설', '폴앤니나', '어느 연쇄살인범의 충격고백!!', '최재호', '2020-11-01', '9791190157216', sysdate, 0, 0, 0, 0);
+insert into off_book values( book_idx.nextVal, '부론강', '소설', '책사랑', '활화산을 필두로...', '이인휘', '2020-10-30', '9791195507573', sysdate, 0, 0, 0, 0);
+insert into off_book values( book_idx.nextVal, '마음챙김의시', '소설', '수오서재', '날개를주웠다 내 날개였다', '루시화', '2020-09-17', '9791190382267', sysdate, 0, 0, 0, 0);
+insert into off_book values( book_idx.nextVal, '우리가 빛의 속도로 갈 수 없다면', '소설', '수오서재', '기난겨울...', '김초엽', '2020-06-24', '9791190090018', sysdate, 0, 0, 0, 0);
+
