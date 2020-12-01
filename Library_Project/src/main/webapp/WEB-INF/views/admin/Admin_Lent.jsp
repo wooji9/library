@@ -152,8 +152,8 @@
                                         			<td>${ lent.redate }</td>
                                         			<td>${ lent.lent }</td>
                                         			<td>
-                                        				<input type="button" value="대여" title="대여" onclick="book_lent();">
-                                        				<input type="button" value="반납." title="반납" onclick="book_return();">
+                                        				<input type="button" value="LENT" title="대여" onclick="book_lent();">
+                                        				<input type="button" value="RETURN" title="반납" onclick="book_return();">
                                         				<%-- <c:if test="${ lent.redate eq null }">
                                         					<input type="button" value="LENT" title="대여" onclick="book_lent();">
                                         				</c:if>
