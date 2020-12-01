@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+	<!-- 전체 게시물 조회 -->
+	<select id="board_list" resultType="board">
+		SELECT * FROM lib_BOARD  where del_info = '0' ORDER BY idx DESC
+	</select>
+	
+	<!-- 새 글 쓰기(댓글 아님) -->
+	<insert id="board_insert" parameterType="board">
+		INSERT INTO lib_BOARD VALUES(
+		lib_BOARD_IDX.NEXTVAL,
+		#{subject},
+		#{name},
+		#{content},
+		SYSDATE,
+		'0',
+		lib_BOARD_IDX.CURRVAL,
+		'0',
+		'0',
+		#{mem_id},
+		#{ip}
+		)	
+	</insert>
+	
+	<!-- 페이지 별 게시물 조회 -->
+	<select id="board_list_condition" parameterType="java.util.HashMap"
+				 resultType="board">
+		SELECT * FROM (SELECT RANK() OVER(ORDER BY REF DESC, STEP ASC) no, B.*
+    		  FROM (SELECT * FROM lib_board) b) WHERE del_info = '0' and no BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- 전체 게시물 수 조회 -->
+	<select id="board_count" resultType="int">
+		SELECT COUNT(*) FROM lib_BOARD where del_info = '0'	
+	</select>
+	
+	<!-- idx에 해당되는 게시물 한 건 조회하기 -->
+	<select id="board_one" resultType="board" parameterType="int">
+		SELECT * FROM lib_BOARD WHERE IDX = #{idx}	
+	</select>
+	
+	<!-- 게시글 삭제 처리 --> 
+	<update id="del_update" parameterType="int">
+		UPDATE lib_BOARD set
+		DEL_INFO  = '1'
+		WHERE IDX = #{idx}
+	</update>
+	
+	<!-- 조회수 증가 -->
+	<update id="board_update_readhit" parameterType="int">
+		UPDATE lib_BOARD SET READHIT = READHIT + 1 WHERE IDX = #{idx}	
+	</update>
+	
+	<!-- 
+	
+	기준 글의 step보다 큰 step들을 1씩 증가
+	<update id="board_update_step" parameterType="board">
+		UPDATE lib_BOARD SET STEP = STEP+1 WHERE REF = #{ref} AND STEP > #{step}	
+	</update>
+	
+	 -->
+	
+ </mapper>

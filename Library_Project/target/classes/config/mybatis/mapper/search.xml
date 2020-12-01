@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="search">
+	
+	<!-- 전체검색 -->
+	<select id="select" resultType="search">
+		select * from off_book order by book_name
+	</select>
+	
+	<!-- 카테고리별 검색 -->
+	<select id="select_bName" resultType="search" parameterType="String">
+		select * from off_book where book_name like '%'||#{search}||'%'
+	</select>
+	
+	<select id="select_category" resultType="search" parameterType="String">
+		select * from off_book where category='%'||#{search}||'%'
+	</select>
+	
+	<select id="select_company" resultType="search" parameterType="String">
+		select * from off_book where company='%'||#{search}||'%'
+	</select>
+	
+	<select id="select_isbl" resultType="search" parameterType="String">
+		select * from off_book where isbl like '%'||#{search}||'%'
+	</select>
+	
+	<select id="select_bYear" resultType="search" parameterType="String">
+		select * from off_book where book_year='%'||#{search}||'%'
+	</select>
+	
+	<!-- 책정보 상세보기  -->
+	<select id="select_one" resultType="search" parameterType="String">
+		select * from off_book where isbl like '%'||#{isbl}||'%'
+	</select>
+	
+	<!-- 예약/대영를 위한 회원정보 가져오기 -->
+	<select id="select_m_id" resultType="member" parameterType="String">
+		select * from member where id=#{m_id}
+	</select>
+	<!-- 예약정보 insert -->
+	<insert id="insertLent" parameterType="vo.LentVO">
+		insert into lent values(
+			lent_idx.nextVal,
+			#{m_id},
+			#{b_isbl},
+			#{lent},
+			#{lentdate},
+			#{redate},
+			#{b_name}
+		)
+	</insert>
+	<!-- 예약/대여를 위한 책정보 가져오기 -->
+	<select id="LentSelect" resultType="vo.LentVO" parameterType="String">
+		select * from lent where b_isbl=#{b_isbl}
+	</select>
+	
+	<!-- 신규책 추가 -->
+	<insert id="new_book_insert" parameterType="search">
+		insert into off_book values(
+			book_idx.nextVal,
+			#{book_name},
+			#{category},
+			#{company},
+			#{content},
+			#{author},
+			#{book_year},
+			#{isbl},
+			sysdate,
+			0,
+			0,
+			0,
+			0
+			
+		)
+	</insert>
+	
+	<select id="selectTime" resultType="search" parameterType="String">
+		SELECT * FROM off_book WHERE RECEIVING BETWEEN sysdate-7 AND sysdate
+	</select>
+	
+	<!-- 예약된책 대여로 바꿔주기 -->
+	<update id="lent_update" parameterType="int">
+		UPDATE lent	SET	lent = 'lent' WHERE idx = #{idx}
+	</update>
+
+	<!-- 대여된책 반납으로 바꿔주기 -->
+	<update id="rt_update" parameterType="int">
+		UPDATE lent	SET	lent = 'rt' WHERE idx = #{idx}
+	</update>
+	
+	<!-- 예약취소해주기 -->
+	<update id="cancelupdate">
+		UPDATE lent set lent = 'cancel' WHERE idx=#{idx}
+	</update>
+	
+</mapper>
